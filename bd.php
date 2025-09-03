@@ -11,14 +11,13 @@ try {
     $conexion = new PDO($dsn, $fields['user'], $fields['pass']);
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo "Conexión remota segura establecida";
+    //echo "Conexión remota segura establecida";
 
     // Ejemplo: verificar versión de MySQL
     $stmt = $conexion->query("SELECT VERSION()");
-    echo "\nMySQL version: " . $stmt->fetch()[0];
+    //echo "\nMySQL version: " . $stmt->fetch()[0];
 
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }
 ?>
-
