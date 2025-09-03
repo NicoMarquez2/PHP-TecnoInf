@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['usuario'] = $usuario['nombre'];
             $_SESSION['tipo'] = $usuario['tipo'];
 
+
             // Usamos php dinamico.
             header("Location: index.php");
             exit;
@@ -60,7 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <button type="submit" class="btn btn-primary">Login</button>
             <a href="register.php" class="btn btn-secondary">Registrarse</a>
             <a href="index.php" class="btn btn-outline-dark">Volver al inicio</a>
-
         </div>
     </form>
 </div>

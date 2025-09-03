@@ -35,7 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
     <h2 class="text-center mb-4">Registrarse</h2>
-
+  
     <?php if($mensaje): ?>
         <div class="alert <?= strpos($mensaje, '✅') !== false ? 'alert-success' : 'alert-danger' ?>">
             <?= htmlspecialchars($mensaje) ?>
@@ -74,9 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <a href="index.php" class="btn btn-outline-dark">Volver al inicio</a>
         </div>
     </form>
-</div>
-
+  </div>
 </body>
 </html>
-
-
