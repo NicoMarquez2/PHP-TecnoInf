@@ -17,11 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['usuario'] = $usuario['nombre'];
             $_SESSION['tipo'] = $usuario['tipo'];
 
-            if ($usuario['tipo'] === 'admin') {
-                header("Location: admin.php");
-            } else {
-                header("Location: cliente.php");
-            }
+
+            // Usamos php dinamico.
+            header("Location: index.php");
             exit;
         } else {
             $mensaje = "❌ Usuario o contraseña incorrectos";
@@ -62,9 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">Login</button>
             <a href="register.php" class="btn btn-secondary">Registrarse</a>
+            <a href="index.php" class="btn btn-outline-dark">Volver al inicio</a>
         </div>
     </form>
 </div>
 
 </body>
 </html>
+
