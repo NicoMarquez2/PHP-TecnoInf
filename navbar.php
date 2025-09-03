@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="/index.php">Restaurante</a>
+        <a class="navbar-brand" href="/index.php">Restaurante tecno-inf</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBar" aria-controls="navBar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -13,7 +13,6 @@
                         <li class="nav-item"><a class="nav-link" href="/admin/modificar_menu.php">Modificar Menú</a></li>
                         <li class="nav-item"><a class="nav-link" href="/admin/eliminar_menu.php">Eliminar Menú</a></li>
                     <?php else: ?>
-                        <li class="nav-item"><a class="nav-link" href="/cliente/menu.php">Ver Menú</a></li>
                         <li class="nav-item"><a class="nav-link" href="/cliente/favoritos.php">Favoritos</a></li>
                         <li class="nav-item"><a class="nav-link" href="/cliente/carrito.php">Carrito</a></li>
                         <li class="nav-item"><a class="nav-link" href="/cliente/historial.php">Historial</a></li>

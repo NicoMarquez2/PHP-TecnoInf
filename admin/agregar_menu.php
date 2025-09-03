@@ -1,5 +1,9 @@
+<?php session_start();?>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/header.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/navbar.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/bd.php'; ?>
+
+
 
 <div class="container">
     <h1>Agregar Menú</h1>
@@ -15,3 +19,6 @@
         <button type="submit" class="btn btn-primary">Agregar</button>
     </form>
 </div>
+
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/footer.php'; ?>
