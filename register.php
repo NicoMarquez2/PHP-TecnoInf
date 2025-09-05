@@ -38,12 +38,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registrarse</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #343a40 !important;
+        }
+    </style>
 </head>
-<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+<body class="d-flex justify-content-center align-items-center vh-100">
 
 <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
     <h2 class="text-center mb-4">Registrarse</h2>
@@ -68,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
         <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-primary">Completar registro</button>
+            <button type="submit" class="btn btn-dark">Completar registro</button>
             <a href="login.php" class="btn btn-secondary">Atrás</a>
             <a href="index.php" class="btn btn-outline-dark">Volver al inicio</a>
         </div>
