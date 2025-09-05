@@ -7,10 +7,16 @@ require 'bd.php';
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/navbar.php'; ?>
 
     <section id="section-banner" class="container-fluid p-0">
-    <div class="banner" style="position:relative; background:url('images/bg-asado.JPG') center/cover no-repeat; height: 700px;">
-        <div class="banner-text" style="position:absolute; top: 50%; left:50%; transform: translate(-50%, -50%); text-align:center; color:white";>
-            <h1>Restaurante tecno-inf</h1>
-            <a href="menu.php" class="btn btn-primary">Ver Menu</a> 
+    <div class="banner" 
+        style="position:relative; 
+                background:url('images/bg-asado.JPG') center/cover no-repeat; 
+                height: 700px;
+                background-color: rgba(0,0,0,0.7); /* capa negra */
+                background-blend-mode: darken;">
+        <div class="banner-text" 
+            style="position:absolute; top: 50%; left:50%; transform: translate(-50%, -50%); text-align:center; color:white;">
+        <h1>Restaurante tecno-inf</h1>
+        <a href="menu.php" class="btn btn-primary">Ver Menu</a> 
         </div>
     </div>
     </section>
