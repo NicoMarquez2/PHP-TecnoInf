@@ -12,6 +12,7 @@
                         <li class="nav-item"><a class="nav-link" href="/admin/agregar_menu.php">Agregar Menú</a></li>
                         <li class="nav-item"><a class="nav-link" href="/admin/modificar_menu.php">Modificar Menú</a></li>
                         <li class="nav-item"><a class="nav-link" href="/admin/eliminar_menu.php">Eliminar Menú</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/admin/crear_admin.php">Registrar Admin</a></li>
                     <?php else: ?>
                         <li class="nav-item"><a class="nav-link" href="/cliente/favoritos.php">Favoritos</a></li>
                         <li class="nav-item"><a class="nav-link" href="/cliente/carrito.php">Carrito</a></li>
