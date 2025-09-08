@@ -4,7 +4,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/bd.php';
 
 // Si no hay id, mostrar lista de menús para elegir
 if (!isset($_GET['id'])) {
-    $stmt = $conexion->query("SELECT id, nombre FROM menu");
+    $stmt = $conexion->query("SELECT * FROM menu ORDER BY id DESC");
     $menus = $stmt->fetchAll(PDO::FETCH_ASSOC);
     ?>
     <!DOCTYPE html>
@@ -12,36 +12,42 @@ if (!isset($_GET['id'])) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Modificar menú</title>
+        <title>Modificar Menú - Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
         <style>
-            body {
-                background-color: #343a40 !important;
-            }
+            body { background-color: #343a40; color: white; }
         </style>
     </head>
     <body>
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/navbar.php'; ?>
+
         <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="card shadow-lg border-0 rounded-3">
-                        <div class="card-body p-4">
-                            <h1 class="text-center mb-4">Selecciona Menú para Editar</h1>
-                            <ul class="list-group">
-                                <?php foreach ($menus as $item): ?>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <?php echo htmlspecialchars($item['nombre']); ?>
-                                        <a href="modificar_menu.php?id=<?php echo $item['id']; ?>" class="btn btn-primary btn-sm">Editar</a>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
+            <h1 class="text-center mb-4">Modificar Menú</h1>
+            <div class="row">
+                <?php if(count($menus) === 0): ?>
+                    <p class="text-center">No hay menús disponibles.</p>
+                <?php endif; ?>
+
+                <?php foreach($menus as $menu): ?>
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-lg border-0">
+                            <img src="/<?= htmlspecialchars(ltrim($menu['foto'], '/')) ?>" class="card-img-top" alt="<?= htmlspecialchars($menu['nombre']) ?>">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title"><?= htmlspecialchars($menu['nombre']) ?></h5>
+                                <p class="card-text"><?= htmlspecialchars($menu['descripcion']) ?></p>
+                                <p class="card-text mt-auto"><strong>Precio: $<?= number_format($menu['precio'], 2) ?></strong></p>
+
+                                <a href="modificar_menu.php?id=<?= $menu['id'] ?>"
+                                   class="btn btn-primary mt-2">
+                                   Editar
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
+
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/footer.php'; ?>
     </body>
     </html>
