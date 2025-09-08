@@ -1,6 +1,13 @@
 <?php session_start();?>
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/bd.php'; 
+
+// Solo admins
+if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'admin') {
+    header("Location: /index.php");
+    exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];

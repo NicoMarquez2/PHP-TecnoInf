@@ -2,6 +2,12 @@
 session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/bd.php';
 
+// Solo admins
+if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'admin') {
+    header("Location: /index.php");
+    exit;
+}
+
 // Si no hay id, mostrar lista de menús para elegir
 if (!isset($_GET['id'])) {
     $stmt = $conexion->query("SELECT id, nombre FROM menu");
