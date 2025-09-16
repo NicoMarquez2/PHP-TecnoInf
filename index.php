@@ -74,11 +74,31 @@ require 'bd.php';
                 echo '          <p class="card-text">' . htmlspecialchars($plato['descripcion']) . '</p>';
                 echo '          <p class="card-text mt-auto"><strong>Precio: $' . number_format($plato['precio'], 2) . '</strong></p>';
                 
-                // Mostrar botón solo si es cliente
+                // Botón de carrito solo si cliente
                 if (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'cliente') {
                     echo '<a href="#" class="btn btn-dark mt-3">Agregar al carrito</a>';
+                    
+                    // Verificar si el plato ya está en favoritos
+                    $stmtFav = $conexion->prepare("SELECT * FROM favoritos WHERE cliente_id = :cliente_id AND menu_id = :menu_id");
+                    $stmtFav->execute([
+                        ':cliente_id' => $_SESSION['id'],
+                        ':menu_id' => $plato['id']
+                    ]);
+                    $esta_fav = $stmtFav->rowCount() > 0;
+                    ?>
+                    <form method="post" action="agregar_favorito.php">
+                        <input type="hidden" name="menu_id" value="<?= $plato['id'] ?>">
+                        <input type="hidden" name="accion" value="<?= $esta_fav ? 'quitar' : 'agregar' ?>">
+                        <div class="d-grid gap-2 mt-3">
+                            <?php if ($esta_fav): ?>
+                                <button type="submit" class="btn btn-outline-secondary">❌ Quitar de favoritos</button>
+                            <?php else: ?>
+                                <button type="submit" class="btn btn-outline-danger">❤ Agregar a favoritos</button>
+                            <?php endif; ?>
+                        </div>
+                    </form>
+                    <?php
                 }
-
                 echo '      </div>';
                 echo '  </div>';
                 echo '</div>';
