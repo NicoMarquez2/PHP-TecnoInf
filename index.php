@@ -86,9 +86,10 @@ require 'bd.php';
                     ]);
                     $esta_fav = $stmtFav->rowCount() > 0;
                     ?>
-                    <form method="post" action="agregar_favorito.php">
+                    <form method="post" action="/agregar_favorito.php">
                         <input type="hidden" name="menu_id" value="<?= $plato['id'] ?>">
                         <input type="hidden" name="accion" value="<?= $esta_fav ? 'quitar' : 'agregar' ?>">
+                        <input type="hidden" name="origen" value="index.php">
                         <div class="d-grid gap-2 mt-3">
                             <?php if ($esta_fav): ?>
                                 <button type="submit" class="btn btn-outline-secondary">❌ Quitar de favoritos</button>

@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['menu_id'], $_POST['ac
     $cliente_id = $_SESSION['id'];
     $menu_id = intval($_POST['menu_id']);
     $accion = $_POST['accion'];
+    $origen = isset($_POST['origen']) ? $_POST['origen'] : 'index.php';
 
     if ($accion === 'agregar') {
         // Agregar a favoritos si no existe
@@ -27,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['menu_id'], $_POST['ac
         $stmt->execute([':cliente_id' => $cliente_id, ':menu_id' => $menu_id]);
     }
 
-    header("Location: index.php#menu");
+    // Redirigir de vuelta a la página de origen
+    header("Location: /" . $origen);
     exit();
 }
