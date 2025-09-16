@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($usuario) {
+            $_SESSION['id'] = $usuario['id'];
             $_SESSION['usuario'] = $usuario['nombre'];
             $_SESSION['tipo'] = $usuario['tipo'];
 
