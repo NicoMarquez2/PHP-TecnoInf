@@ -17,7 +17,6 @@
                         <li class="nav-item"><a class="nav-link" href="/cliente/favoritos.php">Favoritos</a></li>
                         <li class="nav-item"><a class="nav-link" href="/cliente/carrito.php">Carrito</a></li>
                         <li class="nav-item"><a class="nav-link" href="/cliente/historial.php">Historial</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/cliente/ordenar.php">Ordenar Menú</a></li>
                     <?php endif; ?>
                 <?php endif; ?>
             </ul>
