@@ -54,15 +54,60 @@ require 'bd.php';
         </div>
     </section>
 
+            <?php
+        // Inicializar variable de ordenamiento
+        $order_sql = "";
+        $ordenSeleccionado = "";
+
+        // Solo para cliente logueado
+        if (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'cliente') {
+            if (isset($_GET['orden'])) {
+                $ordenSeleccionado = $_GET['orden'];
+                switch ($ordenSeleccionado) {
+                    case 'precio_asc':
+                        $order_sql = "ORDER BY precio ASC";
+                        break;
+                    case 'precio_desc':
+                        $order_sql = "ORDER BY precio DESC";
+                        break;
+                    case 'nombre_asc':
+                        $order_sql = "ORDER BY nombre ASC";
+                        break;
+                    case 'nombre_desc':
+                        $order_sql = "ORDER BY nombre DESC";
+                        break;
+                }
+            }
+        }
+
+        // Traer los platos (ordenados si hay cliente, normal si no)
+        $stmtOrd = $conexion->query("SELECT * FROM menu $order_sql");
+        $platosOrd = $stmtOrd->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+
     <!-- Menú -->
 <div id="menu" class="container my-5"> 
     <h1 class="text-center mb-5">Nuestro menú</h1>
+        
+        <?php if (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'cliente'): ?>
+        <!-- Selector de ordenamiento -->
+        <form method="get" class="mb-4 d-flex align-items-center">
+            <label for="orden" class="text-white fw-bold me-2 mb-0">Ordenar por:</label>
+            <select name="orden" id="orden" class="form-select w-auto" onchange="this.form.submit()">
+                <option value="">Sin ordenar</option>
+                <option value="precio_asc" <?= $ordenSeleccionado=='precio_asc'?'selected':'' ?>>Precio ↑</option>
+                <option value="precio_desc" <?= $ordenSeleccionado=='precio_desc'?'selected':'' ?>>Precio ↓</option>
+                <option value="nombre_asc" <?= $ordenSeleccionado=='nombre_asc'?'selected':'' ?>>Nombre A-Z</option>
+                <option value="nombre_desc" <?= $ordenSeleccionado=='nombre_desc'?'selected':'' ?>>Nombre Z-A</option>
+            </select>
+        </form>   
+        <?php endif; ?>
 
     <div class="row g-4">
         <?php
-            $stmt = $conexion->query("SELECT * FROM menu");
-            $platos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($platos as $plato) {
+            //////////////$stmt = $conexion->query("SELECT * FROM menu");
+            /////////////////$platos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($platosOrd as $plato) {
                 echo '<div class="col-md-4">';
                 echo '  <div class="card h-100 shadow border-0 rounded-3">';
                 echo '      <img src="' . htmlspecialchars($plato['foto']) . '" 
