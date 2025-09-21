@@ -1,7 +1,7 @@
-<?php 
-session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/bd.php'; 
-?>
+<?php session_start();?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/navbar.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/bd.php'; ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -18,9 +18,8 @@ include $_SERVER['DOCUMENT_ROOT'] . '/bd.php';
     </style>
 </head>
 <body>
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/navbar.php'; ?>
     <div class="container my-5"> 
-        <h1 class="text-center mb-5">Mis favoritos</h1>
+        <h1 class="text-center mb-5">❤️ Mis favoritos</h1>
 
         <div class="row g-4">
             <?php
@@ -43,10 +42,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/bd.php';
                     foreach ($favoritos as $plato) {
                         echo '<div class="col-md-4">';
                         echo '  <div class="card h-100 shadow border-0 rounded-3">';
+
                         echo '      <img src="/' . htmlspecialchars($plato['foto']) . '" 
                                           class="card-img-top" 
                                           alt="' . htmlspecialchars($plato['nombre']) . '" 
                                           style="height: 220px; object-fit: cover; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">';
+
                         echo '      <div class="card-body d-flex flex-column">';
                         echo '          <h5 class="card-title fw-bold">' . htmlspecialchars($plato['nombre']) . '</h5>';
                         echo '          <p class="card-text">' . htmlspecialchars($plato['descripcion']) . '</p>';
@@ -62,6 +63,17 @@ include $_SERVER['DOCUMENT_ROOT'] . '/bd.php';
                         echo '    </div>';
                         echo '</form>';
 
+                        // Botón Agregar al carrito (solo cliente logueado)
+                        if (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'cliente') {
+                            echo '<form method="post" action="/cliente/carrito.php">';
+                            echo '    <input type="hidden" name="menu_id" value="' . intval($plato['id']) . '">';
+                            echo '    <input type="hidden" name="accion" value="agregar">';
+                            echo '    <div class="d-grid gap-2 mt-3">';
+                            echo '        <button type="submit" class="btn btn-dark">🛒 Agregar al carrito</button>';
+                            echo '    </div>';
+                            echo '</form>';
+                        }
+
                         echo '      </div>';
                         echo '  </div>';
                         echo '</div>';
@@ -76,3 +88,5 @@ include $_SERVER['DOCUMENT_ROOT'] . '/bd.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/footer.php'; ?>
