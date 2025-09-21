@@ -1,0 +1,16 @@
+.table-fixed th:nth-child(1), 
+.table-fixed td:nth-child(1) {
+    width: 40%;   /* Plato */
+}
+.table-fixed th:nth-child(2), 
+.table-fixed td:nth-child(2) {
+    width: 20%;   /* Precio Unitario */
+}
+.table-fixed th:nth-child(3), 
+.table-fixed td:nth-child(3) {
+    width: 20%;   /* Cantidad */
+}
+.table-fixed th:nth-child(4), 
+.table-fixed td:nth-child(4) {
+    width: 20%;   /* Subtotal */
+}

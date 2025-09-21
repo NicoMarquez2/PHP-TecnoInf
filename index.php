@@ -120,9 +120,16 @@ require 'bd.php';
                 echo '          <p class="card-text mt-auto"><strong>Precio: $' . number_format($plato['precio'], 2) . '</strong></p>';
                 
                 // Botón de carrito solo si cliente
-                if (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'cliente') {
-                    echo '<a href="#" class="btn btn-dark mt-3">Agregar al carrito</a>';
+                if (isset($_SESSION['tipo']) && $_SESSION['tipo'] === 'cliente') { ?>
+                    <form method="post" action="/cliente/carrito.php">
+                        <input type="hidden" name="menu_id" value="<?= $plato['id'] ?>">
+                        <input type="hidden" name="accion" value="agregar">
+                        <div class="d-grid gap-2 mt-3">
+                            <button type="submit" class="btn btn-dark">🛒 Agregar al carrito</button>
+                        </div>
+                    </form>
                     
+                <?php
                     // Verificar si el plato ya está en favoritos
                     $stmtFav = $conexion->prepare("SELECT * FROM favoritos WHERE cliente_id = :cliente_id AND menu_id = :menu_id");
                     $stmtFav->execute([
