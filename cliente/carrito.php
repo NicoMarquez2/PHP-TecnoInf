@@ -2,6 +2,11 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/header.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/navbar.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/bd.php'; ?>
+<?php use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require $_SERVER['DOCUMENT_ROOT'] . '/PHPMailer/src/Exception.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/PHPMailer/src/PHPMailer.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/PHPMailer/src/SMTP.php';?>
 
 <?php
 
@@ -70,6 +75,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
             $stmtUser = $conexion->prepare("SELECT mail FROM usuarios WHERE id = ?");
             $stmtUser->execute([$cliente_id]);
             $correoUsuario = $stmtUser->fetchColumn();
+
+            // Crear mail con detalle de compra
+            $detalleOrden = "<h2>Detalle de tu pedido</h2><ul>";
+            foreach ($_SESSION['carrito'] as $menu_id => $cantidad) {
+                $stmt = $conexion->prepare("SELECT nombre, precio FROM menu WHERE id = ?");
+                $stmt->execute([$menu_id]);
+                $plato = $stmt->fetch(PDO::FETCH_ASSOC);
+                $subtotal = $plato['precio'] * $cantidad;
+                $detalleOrden .= "<li>{$plato['nombre']} (x{$cantidad}) - $" . number_format($subtotal, 2) . "</li>";
+            }
+            $detalleOrden .= "</ul><p><strong>Total: $" . number_format($total, 2) . "</strong></p>";
+
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = 'smtp'; // tu servidor SMTP
+                $mail->SMTPAuth = true;
+                $mail->Username = '@vera.com.uy'; // tu correo
+                $mail->Password = ''; // ojo, mejor usar App Password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $mail->Port = 587;
+
+                $mail->setFrom('@vera.com.uy', 'Restaurante tecno-inf');
+                $mail->addAddress($correoUsuario); // el cliente
+
+                $mail->isHTML(true);
+                $mail->Subject = "Confirmacion de tu compra #$orden_id";
+                $mail->Body    = $detalleOrden;
+
+                $mail->send();
+            } catch (Exception $e) {
+                error_log("Error enviando email: {$mail->ErrorInfo}");
+                echo "<script>alert('Error enviando email: {$mail->ErrorInfo}'); window.location.href='carrito.php';</script>";
+            }
 
             // Vaciar carrito
             $_SESSION['carrito'] = [];
