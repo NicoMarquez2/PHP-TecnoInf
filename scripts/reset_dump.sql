@@ -21,7 +21,8 @@ SET @@SESSION.SQL_LOG_BIN= 0;
 -- GTID state at the beginning of the backup 
 --
 
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '9b9db119-8779-11f0-8ed5-fa0ec10b133b:1-146';
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '9b9db119-8779-11f0-8ed5-fa0ec10b133b:1-146,
+f9367c99-bf79-11f0-89f6-ba63fe870c4a:1-17';
 
 --
 -- Table structure for table `carrito`
@@ -79,7 +80,7 @@ CREATE TABLE `favoritos` (
 
 LOCK TABLES `favoritos` WRITE;
 /*!40000 ALTER TABLE `favoritos` DISABLE KEYS */;
-INSERT INTO `favoritos` VALUES (9,3,10,'2025-09-18 20:29:48'),(10,3,12,'2025-09-20 04:10:36'),(11,5,2,'2025-09-21 16:31:36'),(12,3,3,'2025-09-29 21:17:36'),(13,3,8,'2025-09-29 21:17:42');
+INSERT INTO `favoritos` VALUES (9,3,10,'2025-09-18 20:29:48'),(11,5,2,'2025-09-21 16:31:36'),(12,3,3,'2025-09-29 21:17:36'),(13,3,8,'2025-09-29 21:17:42');
 /*!40000 ALTER TABLE `favoritos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,7 +107,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (2,'Milanesa','Milanesa Premium','images/milanesa.jpg',300.00),(3,'Pizza muzzarella','Pizzeta con salsa de tomate y muzzarella 32cm','images/pizza.jpg',200.00),(5,'Chivito','el mejor del pais creo','images/Chivito_al_pan_uruguayo.jpg',320.00),(8,'Asado','Corte Premium!','images/bg-asado.JPG',350.00),(10,'Sushi 2','30 piezas','images/Sushi_bandeja.jpg',2400.00),(11,'Flan','Flan','images/istockphoto-175260776-612x612.jpg',215.00),(12,'Helado','3 sabores','images/1000_F_388630882_V9W4Gj5KsLp5g7V1Z1uwr8JdP305yY6J.jpg',150.00);
+INSERT INTO `menu` VALUES (2,'Milanesa','Milanesa Premium','images/milanesa.jpg',300.00),(3,'Pizza muzzarella','Pizzeta con salsa de tomate y muzzarella 32cm','images/pizza.jpg',200.00),(5,'Chivito','el mejor del pais creo','images/Chivito_al_pan_uruguayo.jpg',320.00),(8,'Asado','Corte Premium!','images/bg-asado.JPG',350.00),(10,'Sushi 2','30 piezas','images/Sushi_bandeja.jpg',2400.00),(11,'Flan','Flan','images/istockphoto-175260776-612x612.jpg',215.00);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,7 +138,7 @@ CREATE TABLE `orden_detalle` (
 
 LOCK TABLES `orden_detalle` WRITE;
 /*!40000 ALTER TABLE `orden_detalle` DISABLE KEYS */;
-INSERT INTO `orden_detalle` VALUES (1,1,2,1,300.00),(2,1,8,1,350.00),(3,2,3,3,200.00),(4,2,2,1,300.00),(5,2,5,1,320.00),(6,3,8,1,350.00),(7,4,5,1,320.00),(8,5,2,1,300.00),(9,6,2,2,300.00),(10,6,3,2,200.00),(11,7,3,3,200.00),(12,7,12,1,150.00),(13,8,2,2,300.00),(14,9,8,3,350.00),(15,10,2,2,300.00),(16,11,3,1,200.00),(17,12,5,1,320.00),(18,13,3,1,200.00),(19,14,5,1,320.00),(20,15,2,2,300.00),(21,16,3,2,200.00);
+INSERT INTO `orden_detalle` VALUES (1,1,2,1,300.00),(2,1,8,1,350.00),(3,2,3,3,200.00),(4,2,2,1,300.00),(5,2,5,1,320.00),(6,3,8,1,350.00),(7,4,5,1,320.00),(8,5,2,1,300.00),(9,6,2,2,300.00),(10,6,3,2,200.00),(11,7,3,3,200.00),(13,8,2,2,300.00),(14,9,8,3,350.00),(15,10,2,2,300.00),(16,11,3,1,200.00),(17,12,5,1,320.00),(18,13,3,1,200.00),(19,14,5,1,320.00),(20,15,2,2,300.00),(21,16,3,2,200.00);
 /*!40000 ALTER TABLE `orden_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,4 +212,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-29 19:02:35
+-- Dump completed on 2025-11-13 20:30:28

@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
         <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-dark">Completar registro</button>
+            <button type="submit" name="registrarse" class="btn btn-dark">Completar registro</button>
             <a href="login.php" class="btn btn-secondary">Atrás</a>
             <a href="index.php" class="btn btn-outline-dark">Volver al inicio</a>
         </div>
