@@ -5,15 +5,35 @@ test('TC-D05 - Eliminar menú del carrito', async ({ page }) => {
   await loginAsClient(page);
   await page.goto('http://localhost/index.php');
 
-  const btnAgregarCarrito = page.getByRole('link', { name: 'Agregar al carrito' }).first();
-  await btnAgregarCarrito.click();
+  // --- PASO 1: Tomar un plato ---
+  const firstCard = page.locator('.card').first();
+  await expect(firstCard).toBeVisible();
 
-  await page.goto('http://localhost/carrito.php');
-  const btnEliminar = page.getByRole('link', { name: 'Eliminar' }).first();
-  await btnEliminar.click();
-  await page.waitForLoadState('domcontentloaded');
+  const nombreMenu = await firstCard.locator('.card-title').innerText();
+  console.log("🟦 Eliminando del carrito:", nombreMenu);
 
-  // No debería mostrar el mismo ítem
-  // (assert débil: al menos la página sigue cargando sin errores)
-  await expect(page.getByText('Carrito')).toBeVisible();
+  // --- PASO 2: Agregarlo al carrito ---
+  const btnAgregar = firstCard.getByRole('button', { name: /agregar al carrito/i });
+  await Promise.all([
+    page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
+    btnAgregar.click()
+  ]);
+
+  // --- PASO 3: Ir al carrito ---
+  await page.goto('http://localhost/cliente/carrito.php');
+
+  // Confirmar que aparece antes de eliminar
+  await expect(page.locator('td', { hasText: nombreMenu })).toBeVisible();
+
+  // --- PASO 4: Eliminar ---
+  const fila = page.locator(`tr:has(td:has-text("${nombreMenu}"))`);
+  const btnEliminar = fila.getByRole('button', { name: '❌' });
+
+  await Promise.all([
+    page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
+    btnEliminar.click()
+  ]);
+
+  // --- PASO 5: Validar que desapareció ---
+  await expect(page.locator('td', { hasText: nombreMenu })).toHaveCount(0);
 });
