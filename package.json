@@ -6,5 +6,8 @@
   },
   "scripts": {
     "test": "playwright test"
+  },
+  "dependencies": {
+    "mysql2": "^3.15.3"
   }
 }
